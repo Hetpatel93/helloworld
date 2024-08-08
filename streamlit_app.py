@@ -1,37 +1,35 @@
-# Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022-2024)
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-from pathlib import Path
-
+import numpy as np
+import altair as alt
+import pandas as pd
 import streamlit as st
 
-dir_path = Path(__file__).parent
+st.header('st.write')
 
+# Example 1
 
-def run():
-    page = st.navigation(
-        [
-            st.Page(dir_path / "Hello.py"),
-            st.Page(dir_path / "Animation_Demo.py"),
-            st.Page(dir_path / "Plotting_Demo.py"),
-            st.Page(dir_path / "Mapping_Demo.py"),
-            st.Page(dir_path / "Dataframe_Demo.py"),
-        ]
-    )
+st.write('Hello, *World!* :sunglasses:')
 
-    page.run()
+# Example 2
 
+st.write(1234)
 
-if __name__ == "__main__":
-    run()
+# Example 3
+
+df = pd.DataFrame({
+     'first column': [1, 2, 3, 4],
+     'second column': [10, 20, 30, 40]
+     })
+st.write(df)
+
+# Example 4
+
+st.write('Below is a DataFrame:', df, 'Above is a dataframe.')
+
+# Example 5
+
+df2 = pd.DataFrame(
+     np.random.randn(200, 3),
+     columns=['a', 'b', 'c'])
+c = alt.Chart(df2).mark_circle().encode(
+     x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
+st.write(c)
